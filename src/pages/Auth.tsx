@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Brain, Lock, Mail, User, CheckCircle, ExternalLink } from 'lucide-react';
+import { Brain, Lock, Mail, User, CheckCircle, ExternalLink, Shield, Sparkles, Zap, Trophy } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 
 const Auth = () => {
@@ -17,6 +17,12 @@ const Auth = () => {
   const [registerPassword, setRegisterPassword] = useState('');
   const [registerUsername, setRegisterUsername] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showAnimation, setShowAnimation] = useState(false);
+
+  useEffect(() => {
+    // Trigger animations after component mount
+    setShowAnimation(true);
+  }, []);
 
   // If already logged in, redirect to home
   if (!loading && user) {
@@ -52,72 +58,79 @@ const Auth = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-b from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-indigo-950">
+    <div className="min-h-screen flex items-center justify-center p-4 auth-page">
       <div className="absolute top-5 left-5 flex items-center space-x-2">
-        <Brain className="h-8 w-8 text-indigo-600 dark:text-indigo-400 animate-pulse" />
-        <h1 className="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-blue-500 bg-clip-text text-transparent">
+        <Brain className="h-8 w-8 text-luxury-purple dark:text-luxury-gold luxury-logo" />
+        <h1 className="text-2xl font-bold bg-gradient-to-r from-luxury-purple to-luxury-navy bg-clip-text text-transparent">
           Askable.ai
         </h1>
       </div>
       
-      <div className="max-w-6xl w-full grid md:grid-cols-2 gap-8 items-center">
-        <div className="hidden md:block">
+      <div className="max-w-6xl w-full grid md:grid-cols-2 gap-10 items-center">
+        <div className={`hidden md:block space-y-8 ${showAnimation ? 'animate-fadeIn' : 'opacity-0'}`}>
           <div className="space-y-6">
-            <h1 className="text-4xl font-bold text-gray-900 dark:text-white leading-tight">
-              Get Instant Answers with <span className="bg-gradient-to-r from-indigo-600 to-blue-500 bg-clip-text text-transparent">Askable.ai</span>
+            <h1 className="text-5xl font-bold text-luxury-charcoal dark:text-white leading-tight">
+              <span className="bg-gradient-to-r from-luxury-purple to-luxury-navy bg-clip-text text-transparent block mb-2">Askable.ai</span>
+              <span className="text-4xl">Intelligent Answers</span>
+              <span className="block mt-2 text-3xl">Just Ask</span>
             </h1>
             
-            <p className="text-lg text-gray-700 dark:text-gray-300">
-              Upload content from PDFs, videos, or websites, and ask questions to get intelligent answers powered by AI.
+            <p className="text-lg text-luxury-charcoal/80 dark:text-gray-300">
+              Turn any content into an interactive knowledge base. Get accurate answers instantly with our AI-powered platform.
             </p>
             
-            <div className="space-y-4 pt-6">
-              <div className="flex items-start space-x-3">
-                <CheckCircle className="h-6 w-6 text-green-500 mt-0.5" />
+            <div className="space-y-5 pt-6">
+              <div className="feature-item flex items-start space-x-3 p-3 rounded-xl transition-all hover:bg-white/50">
+                <div className="mt-1 bg-luxury-cream p-2 rounded-full">
+                  <Sparkles className="h-5 w-5 text-luxury-gold" />
+                </div>
                 <div>
-                  <h3 className="font-medium text-gray-900 dark:text-white">Start with 5 Free Credits</h3>
-                  <p className="text-gray-600 dark:text-gray-400">Every new account comes with 5 free credits to try our service.</p>
+                  <h3 className="font-semibold text-luxury-charcoal dark:text-white">Premium Experience</h3>
+                  <p className="text-luxury-charcoal/70 dark:text-gray-400">Start with 5 free credits and experience our premium AI service.</p>
                 </div>
               </div>
               
-              <div className="flex items-start space-x-3">
-                <CheckCircle className="h-6 w-6 text-green-500 mt-0.5" />
+              <div className="feature-item flex items-start space-x-3 p-3 rounded-xl transition-all hover:bg-white/50">
+                <div className="mt-1 bg-luxury-cream p-2 rounded-full">
+                  <Zap className="h-5 w-5 text-luxury-gold" />
+                </div>
                 <div>
-                  <h3 className="font-medium text-gray-900 dark:text-white">Instant Analysis</h3>
-                  <p className="text-gray-600 dark:text-gray-400">Our AI processes your content in seconds, not minutes.</p>
+                  <h3 className="font-semibold text-luxury-charcoal dark:text-white">Lightning Fast Analysis</h3>
+                  <p className="text-luxury-charcoal/70 dark:text-gray-400">Our AI processes your content in seconds, not minutes.</p>
                 </div>
               </div>
               
-              <div className="flex items-start space-x-3">
-                <CheckCircle className="h-6 w-6 text-green-500 mt-0.5" />
+              <div className="feature-item flex items-start space-x-3 p-3 rounded-xl transition-all hover:bg-white/50">
+                <div className="mt-1 bg-luxury-cream p-2 rounded-full">
+                  <Shield className="h-5 w-5 text-luxury-gold" />
+                </div>
                 <div>
-                  <h3 className="font-medium text-gray-900 dark:text-white">Accurate Answers</h3>
-                  <p className="text-gray-600 dark:text-gray-400">Get precise responses based on your specific content.</p>
+                  <h3 className="font-semibold text-luxury-charcoal dark:text-white">Privacy First Approach</h3>
+                  <p className="text-luxury-charcoal/70 dark:text-gray-400">Your data remains secure with our enterprise-grade security.</p>
                 </div>
               </div>
               
-              <div className="flex items-start space-x-3">
-                <CheckCircle className="h-6 w-6 text-green-500 mt-0.5" />
+              <div className="feature-item flex items-start space-x-3 p-3 rounded-xl transition-all hover:bg-white/50">
+                <div className="mt-1 bg-luxury-cream p-2 rounded-full">
+                  <Trophy className="h-5 w-5 text-luxury-gold" />
+                </div>
                 <div>
-                  <h3 className="font-medium text-gray-900 dark:text-white">Affordable Plans</h3>
-                  <p className="text-gray-600 dark:text-gray-400">From ₹30 for 10 credits to custom enterprise solutions.</p>
+                  <h3 className="font-semibold text-luxury-charcoal dark:text-white">Award-Winning Accuracy</h3>
+                  <p className="text-luxury-charcoal/70 dark:text-gray-400">Get precise responses based on your specific content.</p>
                 </div>
               </div>
             </div>
             
-            <div className="pt-6">
-              <div className="flex items-center space-x-4">
-                <span className="text-sm text-gray-500 dark:text-gray-400">As featured in:</span>
-                <div className="flex space-x-4">
-                  <div className="opacity-70 hover:opacity-100 transition-opacity">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="80" height="24" viewBox="0 0 80 24" fill="none" className="text-gray-500 dark:text-gray-400">
-                      <path d="M4.27307 13.1V9.4H0.818848V13.1H4.27307ZM11.9686 13.1V9.4H8.51434V13.1H11.9686ZM15.4233 13.1H18.878V9.4H15.4233V13.1ZM26.5735 13.1V9.4H23.1188V13.1H26.5735ZM30.0282 13.1H33.4829V9.4H30.0282V13.1ZM41.1784 13.1V9.4H37.7237V13.1H41.1784ZM44.6331 13.1H48.0878V9.4H44.6331V13.1ZM55.7833 13.1V9.4H52.3286V13.1H55.7833ZM59.238 13.1H62.6927V9.4H59.238V13.1ZM70.3882 13.1V9.4H66.9335V13.1H70.3882ZM73.8429 13.1H77.2976V9.4H73.8429V13.1Z" fill="currentColor"/>
-                    </svg>
+            <div className="pt-8">
+              <div className="testimonial p-6 bg-white/70 backdrop-blur-sm rounded-xl border border-luxury-silver/30">
+                <p className="italic text-luxury-charcoal/80">"Askable.ai transformed how we process our documentation. The insights we get are incredible."</p>
+                <div className="flex items-center mt-4">
+                  <div className="w-10 h-10 rounded-full bg-luxury-cream flex items-center justify-center">
+                    <span className="font-semibold text-luxury-purple">MR</span>
                   </div>
-                  <div className="opacity-70 hover:opacity-100 transition-opacity">
-                    <svg width="96" height="24" viewBox="0 0 96 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-gray-500 dark:text-gray-400">
-                      <path d="M18.4033 14.4V10.8H8.35852V14.4H18.4033ZM18.4033 22.8V19.2H8.35852V22.8H18.4033ZM18.4033 6V2.4H8.35852V6H18.4033ZM1.48438 14.4H5.09115V10.8H1.48438V14.4ZM1.48438 22.8H5.09115V19.2H1.48438V22.8ZM1.48438 6H5.09115V2.4H1.48438V6ZM36.493 22.8H40.0998V2.4H36.493V22.8ZM47.8937 20.28L50.597 17.592L43.3835 10.2L50.597 2.808L47.8937 0.119999L38.0768 10.2L47.8937 20.28ZM54.8641 20.28L66.7877 10.2L54.8641 0.12L52.1607 2.808L59.3743 10.2L52.1607 17.592L54.8641 20.28ZM84.8774 2.4V22.8H88.4842V2.4H84.8774ZM77.1033 14.4V10.8H73.4965V14.4H77.1033ZM77.1033 22.8V19.2H73.4965V22.8H77.1033ZM77.1033 6V2.4H73.4965V6H77.1033ZM67.0521 14.4H70.6589V10.8H67.0521V14.4ZM67.0521 22.8H70.6589V19.2H67.0521V22.8ZM67.0521 6H70.6589V2.4H67.0521V6Z" fill="currentColor"/>
-                    </svg>
+                  <div className="ml-3">
+                    <p className="font-semibold text-luxury-charcoal">Michael Roberts</p>
+                    <p className="text-sm text-luxury-charcoal/70">CTO, InnovateTech</p>
                   </div>
                 </div>
               </div>
@@ -125,26 +138,27 @@ const Auth = () => {
           </div>
         </div>
         
-        <div>
+        <div className={`${showAnimation ? 'animate-slideIn' : 'opacity-0'}`}>
           <Tabs defaultValue="login" className="w-full max-w-md mx-auto">
             <TabsList className="grid w-full grid-cols-2 mb-8">
-              <TabsTrigger value="login" className="text-base py-3">Login</TabsTrigger>
-              <TabsTrigger value="register" className="text-base py-3">Register</TabsTrigger>
+              <TabsTrigger value="login" className="text-base py-3 font-medium">Login</TabsTrigger>
+              <TabsTrigger value="register" className="text-base py-3 font-medium">Register</TabsTrigger>
             </TabsList>
             
             <TabsContent value="login">
-              <Card className="border-0 shadow-lg bg-white dark:bg-gray-800">
-                <CardHeader className="space-y-1">
-                  <CardTitle className="text-2xl font-bold text-center">Welcome back</CardTitle>
-                  <CardDescription className="text-center">
-                    Enter your credentials to access your account
+              <Card className="border-0 shadow-lg bg-white dark:bg-gray-800 auth-card overflow-hidden">
+                <div className="h-1 bg-gradient-to-r from-luxury-purple via-luxury-navy to-luxury-gold"></div>
+                <CardHeader className="space-y-1 pb-2">
+                  <CardTitle className="text-2xl font-bold text-center text-luxury-charcoal dark:text-white">Welcome back</CardTitle>
+                  <CardDescription className="text-center text-luxury-charcoal/70 dark:text-gray-400">
+                    Access your premium AI assistant
                   </CardDescription>
                 </CardHeader>
                 <form onSubmit={handleLogin}>
-                  <CardContent className="space-y-4">
+                  <CardContent className="space-y-4 pt-4">
                     <div className="space-y-2">
-                      <Label htmlFor="email" className="flex items-center gap-2">
-                        <Mail className="h-4 w-4 text-gray-500" /> Email
+                      <Label htmlFor="email" className="flex items-center gap-2 text-luxury-charcoal dark:text-gray-300">
+                        <Mail className="h-4 w-4 text-luxury-purple" /> Email
                       </Label>
                       <Input 
                         id="email" 
@@ -153,15 +167,15 @@ const Auth = () => {
                         value={loginEmail}
                         onChange={(e) => setLoginEmail(e.target.value)}
                         required
-                        className="h-12"
+                        className="h-12 luxury-input bg-luxury-cream/30 focus:bg-white"
                       />
                     </div>
                     <div className="space-y-2">
                       <div className="flex items-center justify-between">
-                        <Label htmlFor="password" className="flex items-center gap-2">
-                          <Lock className="h-4 w-4 text-gray-500" /> Password
+                        <Label htmlFor="password" className="flex items-center gap-2 text-luxury-charcoal dark:text-gray-300">
+                          <Lock className="h-4 w-4 text-luxury-purple" /> Password
                         </Label>
-                        <a href="#" className="text-sm text-indigo-600 hover:text-indigo-800 dark:text-indigo-400">
+                        <a href="#" className="text-sm text-luxury-purple hover:text-luxury-navy dark:text-luxury-gold">
                           Forgot password?
                         </a>
                       </div>
@@ -172,14 +186,14 @@ const Auth = () => {
                         value={loginPassword}
                         onChange={(e) => setLoginPassword(e.target.value)}
                         required
-                        className="h-12"
+                        className="h-12 luxury-input bg-luxury-cream/30 focus:bg-white"
                       />
                     </div>
                   </CardContent>
                   <CardFooter>
                     <Button 
                       type="submit" 
-                      className="w-full h-12 bg-indigo-600 hover:bg-indigo-700 text-white text-base" 
+                      className="w-full h-12 text-white text-base font-medium luxury-btn" 
                       disabled={isSubmitting}
                     >
                       {isSubmitting ? 'Signing in...' : 'Sign In'}
@@ -190,18 +204,19 @@ const Auth = () => {
             </TabsContent>
             
             <TabsContent value="register">
-              <Card className="border-0 shadow-lg bg-white dark:bg-gray-800">
-                <CardHeader className="space-y-1">
-                  <CardTitle className="text-2xl font-bold text-center">Create an account</CardTitle>
-                  <CardDescription className="text-center">
-                    Get started with 5 free credits
+              <Card className="border-0 shadow-lg bg-white dark:bg-gray-800 auth-card overflow-hidden">
+                <div className="h-1 bg-gradient-to-r from-luxury-gold via-luxury-purple to-luxury-navy"></div>
+                <CardHeader className="space-y-1 pb-2">
+                  <CardTitle className="text-2xl font-bold text-center text-luxury-charcoal dark:text-white">Join Askable.ai</CardTitle>
+                  <CardDescription className="text-center text-luxury-charcoal/70 dark:text-gray-400">
+                    Start with 5 free credits today
                   </CardDescription>
                 </CardHeader>
                 <form onSubmit={handleRegister}>
-                  <CardContent className="space-y-4">
+                  <CardContent className="space-y-4 pt-4">
                     <div className="space-y-2">
-                      <Label htmlFor="register-username" className="flex items-center gap-2">
-                        <User className="h-4 w-4 text-gray-500" /> Username
+                      <Label htmlFor="register-username" className="flex items-center gap-2 text-luxury-charcoal dark:text-gray-300">
+                        <User className="h-4 w-4 text-luxury-purple" /> Username
                       </Label>
                       <Input 
                         id="register-username" 
@@ -209,12 +224,12 @@ const Auth = () => {
                         value={registerUsername}
                         onChange={(e) => setRegisterUsername(e.target.value)}
                         required
-                        className="h-12"
+                        className="h-12 luxury-input bg-luxury-cream/30 focus:bg-white"
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="register-email" className="flex items-center gap-2">
-                        <Mail className="h-4 w-4 text-gray-500" /> Email
+                      <Label htmlFor="register-email" className="flex items-center gap-2 text-luxury-charcoal dark:text-gray-300">
+                        <Mail className="h-4 w-4 text-luxury-purple" /> Email
                       </Label>
                       <Input 
                         id="register-email" 
@@ -223,12 +238,12 @@ const Auth = () => {
                         value={registerEmail}
                         onChange={(e) => setRegisterEmail(e.target.value)}
                         required
-                        className="h-12"
+                        className="h-12 luxury-input bg-luxury-cream/30 focus:bg-white"
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="register-password" className="flex items-center gap-2">
-                        <Lock className="h-4 w-4 text-gray-500" /> Password
+                      <Label htmlFor="register-password" className="flex items-center gap-2 text-luxury-charcoal dark:text-gray-300">
+                        <Lock className="h-4 w-4 text-luxury-purple" /> Password
                       </Label>
                       <Input 
                         id="register-password" 
@@ -237,33 +252,48 @@ const Auth = () => {
                         value={registerPassword}
                         onChange={(e) => setRegisterPassword(e.target.value)}
                         required
-                        className="h-12"
+                        className="h-12 luxury-input bg-luxury-cream/30 focus:bg-white"
                       />
                     </div>
-                    <div className="text-sm text-gray-500 dark:text-gray-400">
-                      By registering, you agree to our{" "}
-                      <a href="#" className="text-indigo-600 hover:text-indigo-800 dark:text-indigo-400">Terms of Service</a>
-                      {" "}and{" "}
-                      <a href="#" className="text-indigo-600 hover:text-indigo-800 dark:text-indigo-400">Privacy Policy</a>.
+                    <div className="mt-3 flex items-center justify-between">
+                      <div className="flex items-center">
+                        <CheckCircle className="h-4 w-4 text-luxury-gold mr-2" />
+                        <span className="text-sm text-luxury-charcoal/70 dark:text-gray-400">5 free credits included</span>
+                      </div>
+                      <div className="flex items-center">
+                        <Shield className="h-4 w-4 text-luxury-gold mr-2" />
+                        <span className="text-sm text-luxury-charcoal/70 dark:text-gray-400">Secure access</span>
+                      </div>
                     </div>
                   </CardContent>
-                  <CardFooter>
+                  <CardFooter className="flex flex-col space-y-4">
                     <Button 
                       type="submit" 
-                      className="w-full h-12 bg-indigo-600 hover:bg-indigo-700 text-white text-base" 
+                      className="w-full h-12 text-white text-base font-medium luxury-btn" 
                       disabled={isSubmitting}
                     >
                       {isSubmitting ? 'Creating account...' : 'Create account'}
                     </Button>
+                    <p className="text-xs text-center text-luxury-charcoal/60 dark:text-gray-400">
+                      By registering, you agree to our{" "}
+                      <a href="#" className="text-luxury-purple hover:text-luxury-navy dark:text-luxury-gold underline">Terms of Service</a>
+                      {" "}and{" "}
+                      <a href="#" className="text-luxury-purple hover:text-luxury-navy dark:text-luxury-gold underline">Privacy Policy</a>.
+                    </p>
                   </CardFooter>
                 </form>
               </Card>
             </TabsContent>
           </Tabs>
           
-          <p className="text-center mt-6 text-gray-600 dark:text-gray-400">
-            Askable.ai — Turn any content into an interactive knowledge base.
-          </p>
+          <div className="flex justify-center mt-6 items-center space-x-4">
+            <p className="text-center text-luxury-charcoal/70 dark:text-gray-400 text-sm">
+              Premium support available
+            </p>
+            <a href="/contact" className="text-sm text-luxury-purple hover:text-luxury-navy dark:text-luxury-gold flex items-center">
+              Contact us <ExternalLink className="h-3 w-3 ml-1" />
+            </a>
+          </div>
         </div>
       </div>
     </div>

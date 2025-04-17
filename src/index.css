@@ -36,20 +36,21 @@
     --radius: 0.5rem;
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* Luxury brand inspired colors */
+    --luxury-gold: 45 100% 60%;
+    --luxury-navy: 220 70% 20%;
+    --luxury-deep-purple: 270 50% 25%;
+    --luxury-charcoal: 210 30% 25%;
+    --luxury-silver: 210 20% 90%;
+    --luxury-cream: 40 80% 95%;
   }
 
   .dark {
@@ -88,6 +89,14 @@
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* Luxury brand inspired dark mode colors */
+    --luxury-gold: 45 80% 50%;
+    --luxury-navy: 220 40% 15%;
+    --luxury-deep-purple: 270 30% 20%;
+    --luxury-charcoal: 210 20% 15%;
+    --luxury-silver: 210 15% 70%;
+    --luxury-cream: 40 30% 85%;
   }
 }
 
@@ -120,3 +129,102 @@
 .agent-message {
   @apply bg-gray-100 text-agent-dark self-start;
 }
+
+/* Animation keyframes for the Auth page */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200px 0; }
+  100% { background-position: 200px 0; }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+@keyframes slideInFromLeft {
+  0% { transform: translateX(-20px); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+
+/* Luxury Auth page styling */
+.auth-page {
+  background-image: linear-gradient(135deg, hsl(var(--luxury-cream)), white);
+}
+
+.auth-card {
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.auth-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+.animate-slideIn {
+  animation: slideInFromLeft 0.5s ease-out forwards;
+}
+
+.gold-gradient {
+  background: linear-gradient(135deg, hsl(var(--luxury-gold)), hsl(var(--luxury-gold)/0.8));
+}
+
+.luxury-btn {
+  background: linear-gradient(135deg, hsl(var(--luxury-deep-purple)), hsl(var(--luxury-navy)));
+  transition: all 0.3s ease;
+}
+
+.luxury-btn:hover {
+  background: linear-gradient(135deg, hsl(var(--luxury-navy)), hsl(var(--luxury-deep-purple)));
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.luxury-input {
+  border-color: hsl(var(--luxury-silver)/0.3);
+  transition: all 0.3s ease;
+}
+
+.luxury-input:focus {
+  border-color: hsl(var(--luxury-gold));
+  box-shadow: 0 0 0 2px hsl(var(--luxury-gold)/0.2);
+}
+
+.luxury-logo {
+  animation: pulse 3s infinite ease-in-out;
+}
+
+.shimmer {
+  background: linear-gradient(to right, transparent 0%, rgba(255,255,255,0.2) 50%, transparent 100%);
+  background-size: 200px 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* Testimonial animation */
+.testimonial {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeIn 0.6s ease-out forwards;
+  animation-delay: 0.3s;
+}
+
+/* Feature highlight animation */
+.feature-item {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.feature-item:nth-child(1) { animation: fadeIn 0.6s ease-out 0.2s forwards; }
+.feature-item:nth-child(2) { animation: fadeIn 0.6s ease-out 0.4s forwards; }
+.feature-item:nth-child(3) { animation: fadeIn 0.6s ease-out 0.6s forwards; }
+.feature-item:nth-child(4) { animation: fadeIn 0.6s ease-out 0.8s forwards; }
