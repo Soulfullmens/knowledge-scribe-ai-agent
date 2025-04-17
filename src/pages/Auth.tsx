@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -18,13 +17,12 @@ const Auth = () => {
   const [registerUsername, setRegisterUsername] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showAnimation, setShowAnimation] = useState(false);
+  const [loginCardHover, setLoginCardHover] = useState(false);
 
   useEffect(() => {
-    // Trigger animations after component mount
     setShowAnimation(true);
   }, []);
 
-  // If already logged in, redirect to home
   if (!loading && user) {
     return <Navigate to="/" replace />;
   }
@@ -146,7 +144,23 @@ const Auth = () => {
             </TabsList>
             
             <TabsContent value="login">
-              <Card className="border-0 shadow-lg bg-white dark:bg-gray-800 auth-card overflow-hidden">
+              <Card 
+                className={`
+                  border-0 
+                  shadow-lg 
+                  bg-white 
+                  dark:bg-gray-800 
+                  auth-card 
+                  overflow-hidden 
+                  relative
+                  transition-all 
+                  duration-300
+                  ${loginCardHover ? 'glow-effect' : ''}
+                `}
+                onMouseEnter={() => setLoginCardHover(true)}
+                onMouseLeave={() => setLoginCardHover(false)}
+              >
+                <div className="absolute inset-0 pointer-events-none glow-overlay z-0 opacity-0"></div>
                 <div className="h-1 bg-gradient-to-r from-luxury-purple via-luxury-navy to-luxury-gold"></div>
                 <CardHeader className="space-y-1 pb-2">
                   <CardTitle className="text-2xl font-bold text-center text-luxury-charcoal dark:text-white">Welcome back</CardTitle>
