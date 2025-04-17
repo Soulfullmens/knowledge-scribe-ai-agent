@@ -3,17 +3,38 @@ import React from 'react';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import UploadSection from './UploadSection';
 import ChatSection from './ChatSection';
+import { useCredits } from '@/hooks/useCredits';
+import { toast } from 'sonner';
+import { useNavigate } from 'react-router-dom';
 
 const TabNavigation = () => {
   const [activeContent, setActiveContent] = React.useState<string[] | null>(null);
   const [isProcessing, setIsProcessing] = React.useState(false);
+  const { credits, useCredit } = useCredits();
+  const navigate = useNavigate();
 
-  const handleContentUpload = (content: string[]) => {
+  const handleContentUpload = async (content: string[]) => {
+    // Check if user has enough credits
+    if (credits <= 0) {
+      toast.error("You don't have enough credits. Please purchase more to continue.");
+      navigate('/pricing');
+      return;
+    }
+
     setIsProcessing(true);
     
     // Simulate processing time
-    setTimeout(() => {
-      setActiveContent(content);
+    setTimeout(async () => {
+      // Deduct 1 credit for processing
+      const success = await useCredit();
+      
+      if (success) {
+        setActiveContent(content);
+        toast.success("Content processed successfully! 1 credit used.");
+      } else {
+        toast.error("Failed to process content. Please try again.");
+      }
+      
       setIsProcessing(false);
     }, 2000);
   };
